@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Counter
-//
-//  Created by Владислав Абушенко on 24.03.2025.
-//
-// Как перенести на другую строку count?
 import UIKit
 
 class ViewController: UIViewController {
