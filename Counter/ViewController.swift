@@ -1,16 +1,7 @@
 import UIKit
 
-class ViewController: UIViewController {
-    @IBOutlet weak var valueOfCounter: UILabel!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var resetCounterButton: UIButton!
-    @IBOutlet weak var logTextView: UITextView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+final class ViewController: UIViewController {
+
     private var count = 0
     private var formattedCurrentDate: String {
         DateFormatter.localizedString(
@@ -19,14 +10,31 @@ class ViewController: UIViewController {
             timeStyle: .medium)
     }
     
-    @IBAction func plusButtonAction() {
+    @IBOutlet private weak var valueOfCounter: UILabel!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var resetCounterButton: UIButton!
+    @IBOutlet private weak var logTextView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    private func scrollDown() {
+        let range = NSMakeRange(logTextView.text.count - 1, 1)
+        logTextView.scrollRangeToVisible(range)
+    }
+    
+    @IBAction private func plusButtonAction() {
         count += 1
         valueOfCounter.text = "Значение счетчика: \(count)"
         logTextView.text += "\n[\(formattedCurrentDate)]: значение изменено на +1"
         scrollDown()
+        
+        print(Bundle.main.bundlePath)
     }
     
-    @IBAction func minusButtonAction(_ sender: Any) {
+    @IBAction private func minusButtonAction(_ sender: Any) {
         if count > 0 {
             count -= 1
             valueOfCounter.text = "Значение счетчика: \(count)"
@@ -39,7 +47,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func resetCounterAction(_ sender: Any) {
+    @IBAction private func resetCounterAction(_ sender: Any) {
         if count != 0 {
             count = 0
         }
@@ -48,9 +56,4 @@ class ViewController: UIViewController {
         scrollDown()
     }
     
-    func scrollDown() {
-        let range = NSMakeRange(logTextView.text.count, 0)
-        logTextView.scrollRangeToVisible(range)
-    }
 }
-
